@@ -1,0 +1,60 @@
+<div class="users-container">
+  <h2>All Users</h2>
+  <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+  <table class="users-table" *ngIf="users.length">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.username }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.roles ? (user.roles | json) : user.role }}</td>
+        <td>
+          <button class="edit-btn" (click)="openEditForm(user)">Edit</button>
+          <button class="delete-btn" (click)="user.id !== undefined && deleteUser(user.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!users.length && !errorMsg">No users found.</div>
+  <button class="add-btn" (click)="openAddForm()">Add User</button>
+
+  <div class="user-form-modal" *ngIf="showForm">
+    <div class="user-form">
+      <h3>{{ isEdit ? 'Edit User' : 'Add User' }}</h3>
+      <form (ngSubmit)="saveUser()" autocomplete="off">
+        <label for="username">Username</label>
+        <input id="username" type="text" [(ngModel)]="formUser.username" name="username" required [readonly]="isEdit" />
+        <label for="name">Name</label>
+        <input id="name" type="text" [(ngModel)]="formUser.name" name="name" required />
+        <label for="email">Email</label>
+        <input id="email" type="email" [(ngModel)]="formUser.email" name="email" required />
+        <label for="phone">Phone</label>
+        <input id="phone" type="text" [(ngModel)]="formUser.phone" name="phone" required />
+        <label for="password">Password</label>
+        <input id="password" type="password" [(ngModel)]="formUser.password" name="password" [required]="!isEdit" />
+        <label for="role">Role</label>
+        <select id="role" [(ngModel)]="formUser.role" name="role" required>
+          <option value="STUDENT">Student</option>
+          <option value="FACULTY">Faculty</option>
+          <option value="ADMIN">Admin</option>
+          <option value="DEPARTMENT">Department</option>
+        </select>
+        <div class="form-actions">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" class="cancel-btn" (click)="cancelForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

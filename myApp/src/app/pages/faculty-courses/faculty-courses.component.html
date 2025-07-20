@@ -1,0 +1,73 @@
+<div class="faculty-courses-hero glassy-3d">
+  <div class="courses-header">
+    <i class="bi bi-mortarboard courses-icon-3d"></i>
+    <h1 class="gradient-text-3d">My Courses</h1>
+  </div>
+  <div class="faculty-courses-tables-row">
+    <div class="table-responsive">
+      <table class="table glass-table-3d align-middle professional-table">
+        <thead>
+          <tr>
+            <th><i class="bi bi-bookmark-star"></i> Course Name</th>
+            <th><i class="bi bi-123"></i> Credits</th>
+            <th><i class="bi bi-building"></i> Department</th>
+            <th class="text-center"><i class="bi bi-gear"></i> Actions</th>
+            <th class="text-center"><i class="bi bi-eye"></i> View</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of courses; let i = index" class="table-row-3d">
+            <td>{{c.name}}</td>
+            <td>{{c.credits}}</td>
+            <td>{{c.department}}</td>
+            <td class="text-center">
+              <button class="action-badge edit" (click)="editCourse(i)"><i class="bi bi-pencil-square"></i> Edit</button>
+              <button class="action-badge delete" (click)="deleteCourse(i)"><i class="bi bi-trash"></i> Delete</button>
+            </td>
+            <td class="text-center">
+              <button class="action-badge view" (click)="viewCourse(c)"><i class="bi bi-eye"></i> View</button>
+            </td>
+          </tr>
+          <tr *ngIf="courses.length === 0">
+            <td colspan="5" class="text-center text-muted">No courses added yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Course Details Modal (always visible on right for desktop) -->
+    <div class="course-details-panel" *ngIf="selectedCourse">
+      <div class="glass-table-3d course-details-box">
+        <h5 class="modal-title mb-3">Course Details</h5>
+        <p><strong>Course Name:</strong> {{selectedCourse.name}}</p>
+        <p><strong>Credits:</strong> {{selectedCourse.credits}}</p>
+        <p><strong>Department:</strong> {{selectedCourse.department}}</p>
+        <button class="btn btn-glass-3d mt-2 w-100" (click)="selectedCourse = null">Close</button>
+      </div>
+    </div>
+  </div>
+  <form class="glass-form-3d mb-4" (ngSubmit)="editingIndex === null ? addCourse() : updateCourse()">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label-3d">Course Name</label>
+        <input class="form-control-3d" placeholder="e.g. Algorithms" [(ngModel)]="newCourse.name" name="name" required />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label-3d">Credits</label>
+        <input class="form-control-3d" type="number" min="1" placeholder="e.g. 4" [(ngModel)]="newCourse.credits" name="credits" required />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label-3d">Department</label>
+        <input class="form-control-3d" placeholder="e.g. CSE" [(ngModel)]="newCourse.department" name="department" required />
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button class="btn btn-3d-gradient w-100" type="submit">
+          <i class="bi" [ngClass]="editingIndex === null ? 'bi-plus-circle' : 'bi-check-circle'"></i>
+          {{ editingIndex === null ? 'Add' : 'Update' }}
+        </button>
+        <button *ngIf="editingIndex !== null" class="btn btn-glass-3d ms-2 w-100" type="button" (click)="editingIndex = null; newCourse = {name:'',credits:0,department:''}">
+          <i class="bi bi-x-circle"></i> Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+

@@ -1,0 +1,49 @@
+.auth-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(8,44,77,0.12);
+  padding: 2.5rem 2rem 2rem 2rem;
+  text-align: center;
+}
+.auth-container h2 {
+  margin-bottom: 2rem;
+  color: #082c4d;
+  font-size: 2rem;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #082c4d;
+  font-weight: 600;
+}
+.form-group input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #b0c4de;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.form-group input:focus {
+  border: 1.5px solid #075fac;
+}
+.btn-3d {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.switch-link {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+.switch-link a {
+  color: #075fac;
+  text-decoration: underline;
+  font-weight: 600;
+}

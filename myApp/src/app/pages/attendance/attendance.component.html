@@ -1,0 +1,108 @@
+<div class="feature-hero glassy-3d">
+  <h1 class="gradient-text-3d">Attendance</h1>
+
+  <form class="glass-form-3d mb-4" (ngSubmit)="editingIndex === null ? addRecord() : updateRecord()">
+    <div class="row g-3 align-items-end">
+      <!-- Date -->
+      <div class="col-md-3">
+        <label class="form-label-3d">Date</label>
+        <input class="form-control-3d" type="date" [(ngModel)]="newRecord.date" name="date" required />
+      </div>
+
+      <!-- Course -->
+      <div class="col-md-2">
+        <label class="form-label-3d">Course</label>
+        <select class="form-control-3d" [(ngModel)]="selectedCourse" name="course"
+                (ngModelChange)="newRecord.course = $event; newRecord.class = ''; newRecord.student = ''" required>
+          <option value="" disabled>Select Course</option>
+          <option *ngFor="let course of courses" [value]="course">{{ course }}</option>
+        </select>
+      </div>
+
+      <!-- Class -->
+      <div class="col-md-2">
+        <label class="form-label-3d">Class</label>
+        <select class="form-control-3d" [(ngModel)]="selectedClass" name="class"
+                (ngModelChange)="newRecord.class = $event"
+                [disabled]="!selectedCourse" required>
+          <option value="" disabled>Select Class</option>
+          <option *ngFor="let cl of getAvailableClasses()" [value]="cl">{{ cl }}</option>
+        </select>
+      </div>
+
+      <!-- ✅ Student Name (Text Input) -->
+      <div class="col-md-3">
+        <label class="form-label-3d">Student Name</label>
+        <input
+          class="form-control-3d"
+          type="text"
+          [(ngModel)]="newRecord.student"
+          name="student"
+          placeholder="Enter student name"
+          [disabled]="!selectedClass"
+          required
+        />
+      </div>
+
+      <!-- Status -->
+      <div class="col-md-2">
+        <label class="form-label-3d">Status</label>
+        <select class="form-control-3d" [(ngModel)]="newRecord.status" name="status" required>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+        </select>
+      </div>
+
+      <!-- Submit / Cancel -->
+      <div class="col-md-12 d-flex justify-content-end mt-3">
+        <button class="btn btn-3d-gradient me-2" type="submit">
+          <i class="bi" [ngClass]="editingIndex === null ? 'bi-plus-circle' : 'bi-check-circle'"></i>
+          {{ editingIndex === null ? 'Add' : 'Update' }}
+        </button>
+        <button *ngIf="editingIndex !== null" class="btn btn-glass-3d" type="button" (click)="resetForm()">
+          <i class="bi bi-x-circle"></i> Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Attendance Table -->
+  <div class="table-responsive">
+    <table class="table glass-table-3d align-middle professional-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Course</th>
+          <th>Class</th>
+          <th>Student</th>
+          <th>Status</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of attendance; let i = index">
+          <td>{{ record.date }}</td>
+          <td>{{ record.course }}</td>
+          <td>{{ record.class }}</td>
+          <td>{{ record.student }}</td>
+          <td>
+            <span class="action-badge" [ngClass]="record.status === 'Present' ? 'view' : 'delete'">
+              {{ record.status }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button class="action-badge edit" (click)="editRecord(i)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="action-badge delete" (click)="deleteRecord(i)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="attendance.length === 0">
+          <td colspan="6" class="text-center text-muted">No attendance records yet.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

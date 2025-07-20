@@ -1,0 +1,485 @@
+<div class="feature-hero glassy">
+  <ng-container [ngSwitch]="featureName">
+    <!-- Admin: Dashboard Overview -->
+    <div *ngSwitchCase="'Admin Dashboard'">
+      <h1 class="gradient-text mb-4">Admin Dashboard</h1>
+      <div class="admin-dashboard-grid">
+        <div class="admin-feature-card glassy" (click)="setAdminFeature('Students')">
+          <div class="admin-feature-icon"><span>🎓</span></div>
+          <h2>Students</h2>
+          <p>Manage all student records and enrollment.</p>
+        </div>
+        <div class="admin-feature-card glassy" (click)="setAdminFeature('Faculty')">
+          <div class="admin-feature-icon"><span>👨‍🏫</span></div>
+          <h2>Faculty</h2>
+          <p>Manage faculty profiles, assignments, and department membership.</p>
+        </div>
+        <div class="admin-feature-card glassy" (click)="setAdminFeature('Courses')">
+          <div class="admin-feature-icon"><span>📚</span></div>
+          <h2>Courses</h2>
+          <p>Create, edit, and assign courses to faculty and students.</p>
+        </div>
+        <div class="admin-feature-card glassy" (click)="setAdminFeature('Departments')">
+          <div class="admin-feature-icon"><span>🏢</span></div>
+          <h2>Departments</h2>
+          <p>Oversee all departments and their structure.</p>
+        </div>
+        <div class="admin-feature-card glassy" (click)="setAdminFeature('Reports')">
+          <div class="admin-feature-icon"><span>📊</span></div>
+          <h2>Reports & Analytics</h2>
+          <p>View system-wide analytics and reports.</p>
+        </div>
+        <div class="admin-feature-card glassy" (click)="setAdminFeature('Settings')">
+          <div class="admin-feature-icon"><span>⚙️</span></div>
+          <h2>System Settings</h2>
+          <p>Manage roles, permissions, and system configuration.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Student: My Courses (Course Selection + Details View) -->
+    <div *ngSwitchCase="'My Courses'">
+      <h1><span class="gradient-text">My Courses</span></h1>
+      <div class="glass-form" style="max-width: 480px; margin-bottom: 2.2rem;">
+        <form (ngSubmit)="submitStudentCourses()" autocomplete="off">
+          <label class="form-label" style="font-size:1.13rem;">Select Courses to Enroll</label>
+          <div class="custom-multiselect-container">
+            <div class="custom-multiselect-selected" *ngIf="studentSelectedCourses.length">
+              <span *ngFor="let course of studentSelectedCourses" class="custom-multiselect-chip">
+                {{course}}
+                <span class="custom-multiselect-remove" (click)="removeStudentCourse(course)">&times;</span>
+              </span>
+            </div>
+            <select class="custom-multiselect form-control glass-input" [(ngModel)]="studentSelectedCourses" name="studentDashboardCourses" multiple required>
+              <option *ngFor="let c of studentCourseDetails" [ngValue]="c.name">{{c.name}}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary glass-btn gradient-btn mt-2" [disabled]="!studentSelectedCourses.length">Submit</button>
+          <span *ngIf="studentCourseSubmitSuccess" style="color:#22c55e;font-weight:700;margin-left:1rem;">Saved!</span>
+        </form>
+      </div>
+      <h2 style="font-size:1.25rem;font-weight:800;margin-bottom:0.7rem;">Available Course Details</h2>
+      <table class="table glass-table" style="max-width: 700px;">
+        <thead>
+          <tr><th>Course Name</th><th>Credits</th><th>Faculty</th><th>Department</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of studentCourseDetails">
+            <td>{{c.name}}</td><td>{{c.credits}}</td><td>{{c.faculty}}</td><td>{{c.dept}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Student: Grades -->
+    <div *ngSwitchCase="'Grades'">
+      <h1><span class="gradient-text">Grades</span></h1>
+      <table class="table glass-table">
+        <thead>
+          <tr><th>Course</th><th>Grade</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let g of [{course:'Mathematics',grade:'A',status:'Passed'},{course:'Physics',grade:'B+',status:'Passed'}]">
+            <td>{{g.course}}</td><td>{{g.grade}}</td><td>{{g.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Student: Profile -->
+    <div *ngSwitchCase="'Profile'">
+      <h1><span class="gradient-text">Student Profile</span></h1>
+      <div class="profile-card glassy">
+        <p><b>Name:</b> John Doe</p>
+        <p><b>Email:</b> john.doe&#64;email.com</p>
+        <p><b>Branch:</b> Computer Science</p>
+        <p><b>Date of Birth:</b> 2003-05-12</p>
+        <p><b>Department:</b> Engineering</p>
+      </div>
+    </div>
+
+    <!-- Student: Announcements -->
+    <div *ngSwitchCase="'Announcements'">
+      <h1><span class="gradient-text">Announcements</span></h1>
+      <ul class="list-group glass-list">
+        <li class="list-group-item" *ngFor="let a of [{title:'Exam Schedule',date:'2025-07-01',msg:'Final exams start July 15.'},{title:'Holiday Notice',date:'2025-06-20',msg:'College closed on June 21.'}]">
+          <b>{{a.title}}</b> <span class="text-muted">({{a.date}})</span><br>{{a.msg}}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Student: Support -->
+    <div *ngSwitchCase="'Support'">
+      <h1><span class="gradient-text">Support</span></h1>
+      <form class="glass-form" (submit)="$event.preventDefault()">
+        <div class="mb-3"><label>Your Issue</label><textarea class="form-control" rows="3" placeholder="Describe your issue..."></textarea></div>
+        <button class="btn btn-primary btn-3d" disabled>Submit (Demo)</button>
+      </form>
+      <p class="mt-3 text-muted">For urgent help, contact support&#64;college.edu</p>
+    </div>
+
+    <!-- Faculty: My Courses -->
+    <div *ngSwitchCase="'Faculty My Courses'">
+      <h1><span class="gradient-text">My Courses (Faculty)</span></h1>
+      <table class="table glass-table">
+        <thead>
+          <tr><th>Course Name</th><th>Credits</th><th>Department</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of [{name:'Algorithms',credits:4,department:'CSE'},{name:'Data Structures',credits:3,department:'CSE'}]">
+            <td>{{c.name}}</td><td>{{c.credits}}</td><td>{{c.department}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Faculty: Attendance -->
+    <div *ngSwitchCase="'Attendance'">
+      <h1><span class="gradient-text">Attendance</span></h1>
+      <table class="table glass-table">
+        <thead>
+          <tr><th>Date</th><th>Course</th><th>Student</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of [{date:'2025-07-01',course:'Algorithms',student:'Alice',status:'Present'},{date:'2025-07-01',course:'Algorithms',student:'Bob',status:'Absent'}]">
+            <td>{{a.date}}</td><td>{{a.course}}</td><td>{{a.student}}</td><td>{{a.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Faculty: Gradebook -->
+    <div *ngSwitchCase="'Gradebook'">
+      <h1><span class="gradient-text">Gradebook</span></h1>
+      <table class="table glass-table">
+        <thead>
+          <tr><th>Student</th><th>Course</th><th>Grade</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let g of [{student:'Alice',course:'Algorithms',grade:'A'},{student:'Bob',course:'Algorithms',grade:'B+'}]">
+            <td>{{g.student}}</td><td>{{g.course}}</td><td>{{g.grade}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Faculty: Profile -->
+    <div *ngSwitchCase="'Faculty Profile'">
+      <h1><span class="gradient-text">Faculty Profile</span></h1>
+      <div class="profile-card glassy">
+        <p><b>Name:</b> Dr. Rao</p>
+        <p><b>Email:</b> rao&#64;college.edu</p>
+        <p><b>Designation:</b> Professor</p>
+        <p><b>Specialization:</b> Algorithms</p>
+        <p><b>Phone:</b> 9876543210</p>
+      </div>
+    </div>
+
+    <!-- Department: Department Info -->
+    <div *ngSwitchCase="'Department Info'">
+      <h1><span class="gradient-text">Department Info</span></h1>
+      <div class="profile-card glassy">
+        <p><b>Name:</b> Computer Science & Engineering</p>
+        <p><b>Head:</b> Dr. Smith</p>
+        <p><b>Email:</b> smith&#64;college.edu</p>
+      </div>
+    </div>
+
+    <!-- Department: Faculty List -->
+    <div *ngSwitchCase="'Faculty List'">
+      <h1><span class="gradient-text">Faculty List</span></h1>
+      <table class="table glass-table">
+        <thead>
+          <tr><th>Name</th><th>Designation</th><th>Email</th><th>Specialization</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let f of [{name:'Dr. Rao',designation:'Professor',email:'rao@college.edu',spec:'Algorithms'},{name:'Dr. Sharma',designation:'Associate Prof.',email:'sharma@college.edu',spec:'Physics'}]">
+            <td>{{f.name}}</td><td>{{f.designation}}</td><td>{{f.email.replace('@','&#64;')}}</td><td>{{f.spec}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Department: Student List -->
+    <div *ngSwitchCase="'Student List'">
+      <h1><span class="gradient-text">Student List</span></h1>
+      <table class="table glass-table">
+        <thead>
+          <tr><th>Name</th><th>Branch</th><th>Email</th><th>DOB</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of [{name:'Alice',branch:'CSE',email:'alice@college.edu',dob:'2003-01-01'},{name:'Bob',branch:'CSE',email:'bob@college.edu',dob:'2002-12-12'}]">
+            <td>{{s.name}}</td><td>{{s.branch}}</td><td>{{s.email.replace('@','&#64;')}}</td><td>{{s.dob}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Department: Course Management -->
+    <div *ngSwitchCase="'Course Management'">
+      <h1><span class="gradient-text">Course Management</span></h1>
+      <table class="table glass-table">
+        <thead>
+          <tr><th>Course Name</th><th>Credits</th><th>Duration</th><th>Faculty</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of [{name:'Algorithms',credits:4,duration:'1 sem',faculty:'Dr. Rao'},{name:'Physics',credits:3,duration:'1 sem',faculty:'Dr. Sharma'}]">
+            <td>{{c.name}}</td><td>{{c.credits}}</td><td>{{c.duration}}</td><td>{{c.faculty}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Department: Reports -->
+    <div *ngSwitchCase="'Reports'">
+      <h1><span class="gradient-text">Reports</span></h1>
+      <div class="profile-card glassy">
+        <p>Analytics and reports for department activities will be shown here.</p>
+      </div>
+    </div>
+
+    <!-- Admin: Students (CRUD side-by-side) -->
+    <div *ngSwitchCase="'Students'">
+      <h1><span class="gradient-text">All Students</span></h1>
+      <div class="admin-crud-row">
+        <form class="admin-crud-form" (ngSubmit)="addOrUpdateStudent()" autocomplete="off">
+          <h5 class="mb-3">{{ editingStudent !== null ? 'Edit Student' : 'Add Student' }}</h5>
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control glass-input" [(ngModel)]="newStudent.name" name="studentName" required maxlength="40">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control glass-input" [(ngModel)]="newStudent.email" name="studentEmail" required type="email">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Branch</label>
+            <input class="form-control glass-input" [(ngModel)]="newStudent.branch" name="studentBranch" required maxlength="20">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Department</label>
+            <input class="form-control glass-input" [(ngModel)]="newStudent.dept" name="studentDept" required maxlength="20">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Enrolled Courses</label>
+            <div class="custom-multiselect-container">
+              <div class="custom-multiselect-selected" *ngIf="newStudent.courses?.length">
+                <span *ngFor="let course of newStudent.courses" class="custom-multiselect-chip">
+                  {{course}}
+                  <span class="custom-multiselect-remove" (click)="removeStudentCourse(course)">&times;</span>
+                </span>
+              </div>
+              <select class="custom-multiselect form-control glass-input" [(ngModel)]="newStudent.courses" name="studentCourses" multiple>
+                <option *ngFor="let c of courses" [ngValue]="c.name">{{c.name}}</option>
+              </select>
+            </div>
+            <small class="text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple.</small>
+          </div>
+          <div class="d-flex gap-2 justify-content-end">
+            <button type="submit" class="btn btn-primary glass-btn gradient-btn">{{ editingStudent !== null ? 'Update' : 'Add' }}</button>
+            <button *ngIf="editingStudent !== null" type="button" class="btn btn-secondary glass-btn" (click)="cancelStudentEdit()">Cancel</button>
+          </div>
+        </form>
+        <div class="admin-crud-table">
+          <table class="table glass-table mb-0">
+            <thead>
+          <tr><th>Name</th><th>Email</th><th>Branch</th><th>Department</th><th>Enrolled Courses</th><th style="min-width:120px">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of students; let i = index">
+                <td>{{s.name}}</td>
+                <td>{{s.email.replace('@','&#64;')}}</td>
+                <td>{{s.branch}}</td>
+                <td>{{s.dept}}</td>
+                <td>
+                  <span *ngIf="s.courses && s.courses.length > 0">{{ s.courses.join(', ') }}</span>
+                  <span *ngIf="!s.courses || s.courses.length === 0" class="text-muted">None</span>
+                </td>
+                <td>
+                  <button class="btn btn-outline-info glass-btn btn-sm me-1" (click)="editStudent(i)" title="Edit"><i class="bi bi-pencil-square"></i> Edit</button>
+                  <button class="btn btn-outline-danger glass-btn btn-sm" (click)="deleteStudent(i)" title="Delete"><i class="bi bi-trash"></i> Delete</button>
+                </td>
+              </tr>
+              <tr *ngIf="students.length === 0"><td colspan="6" class="text-center text-muted">No students yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin: Faculty (CRUD side-by-side) -->
+    <div *ngSwitchCase="'Faculty'">
+      <h1><span class="gradient-text">All Faculty</span></h1>
+      <div class="admin-crud-row">
+        <form class="admin-crud-form" (ngSubmit)="addOrUpdateFaculty()" autocomplete="off">
+          <h5 class="mb-3">{{ editingFaculty !== null ? 'Edit Faculty' : 'Add Faculty' }}</h5>
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control glass-input" [(ngModel)]="newFaculty.name" name="facultyName" required maxlength="40">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control glass-input" [(ngModel)]="newFaculty.email" name="facultyEmail" required type="email">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Department</label>
+            <select class="form-control glass-input" [(ngModel)]="newFaculty.dept" name="facultyDept" required>
+              <option *ngFor="let d of departments" [ngValue]="d.name">{{d.name}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Associated Courses</label>
+            <div class="custom-multiselect-container">
+              <div class="custom-multiselect-selected" *ngIf="newFaculty.courses?.length">
+                <span *ngFor="let course of newFaculty.courses" class="custom-multiselect-chip">
+                  {{course}}
+                  <span class="custom-multiselect-remove" (click)="removeFacultyCourse(course)">&times;</span>
+                </span>
+              </div>
+              <select class="custom-multiselect form-control glass-input" [(ngModel)]="newFaculty.courses" name="facultyCourses" multiple>
+                <option *ngFor="let c of courses" [ngValue]="c.name">{{c.name}}</option>
+              </select>
+            </div>
+            <small class="text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple.</small>
+          </div>
+          <div class="d-flex gap-2 justify-content-end">
+            <button type="submit" class="btn btn-primary glass-btn gradient-btn">{{ editingFaculty !== null ? 'Update' : 'Add' }}</button>
+            <button *ngIf="editingFaculty !== null" type="button" class="btn btn-secondary glass-btn" (click)="cancelFacultyEdit()">Cancel</button>
+          </div>
+        </form>
+        <div class="admin-crud-table">
+          <table class="table glass-table mb-0">
+            <thead>
+          <tr><th>Name</th><th>Email</th><th>Department</th><th>Associated Courses</th><th style="min-width:120px">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of facultyList; let i = index">
+                <td>{{f.name}}</td>
+                <td>{{f.email.replace('@','&#64;')}}</td>
+                <td>{{f.dept}}</td>
+                <td>
+                  <span *ngIf="f.courses && f.courses.length > 0">{{ f.courses.join(', ') }}</span>
+                  <span *ngIf="!f.courses || f.courses.length === 0" class="text-muted">None</span>
+                </td>
+                <td>
+                  <button class="btn btn-outline-info glass-btn btn-sm me-1" (click)="editFaculty(i)" title="Edit"><i class="bi bi-pencil-square"></i> Edit</button>
+                  <button class="btn btn-outline-danger glass-btn btn-sm" (click)="deleteFaculty(i)" title="Delete"><i class="bi bi-trash"></i> Delete</button>
+                </td>
+              </tr>
+              <tr *ngIf="facultyList.length === 0"><td colspan="5" class="text-center text-muted">No faculty yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin: Courses (CRUD side-by-side) -->
+    <div *ngSwitchCase="'Courses'">
+      <h1><span class="gradient-text">All Courses</span></h1>
+      <div class="admin-crud-row">
+        <form class="admin-crud-form" (ngSubmit)="addOrUpdateCourse()" autocomplete="off">
+          <h5 class="mb-3">{{ editingCourse !== null ? 'Edit Course' : 'Add Course' }}</h5>
+          <div class="mb-3">
+            <label class="form-label">Course Name</label>
+            <input class="form-control glass-input" [(ngModel)]="newCourse.name" name="courseName" required maxlength="40">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Credits</label>
+            <input class="form-control glass-input" [(ngModel)]="newCourse.credits" name="courseCredits" required type="number" min="1" max="10">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Faculty</label>
+            <input class="form-control glass-input" [(ngModel)]="newCourse.faculty" name="courseFaculty" required maxlength="40">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Department</label>
+            <input class="form-control glass-input" [(ngModel)]="newCourse.dept" name="courseDept" required maxlength="20">
+          </div>
+          <div class="d-flex gap-2 justify-content-end">
+            <button type="submit" class="btn btn-primary glass-btn gradient-btn">{{ editingCourse !== null ? 'Update' : 'Add' }}</button>
+            <button *ngIf="editingCourse !== null" type="button" class="btn btn-secondary glass-btn" (click)="cancelCourseEdit()">Cancel</button>
+          </div>
+        </form>
+        <div class="admin-crud-table">
+          <table class="table glass-table mb-0">
+            <thead>
+          <tr><th>Course Name</th><th>Credits</th><th>Faculty</th><th>Department</th><th style="min-width:120px">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of courses; let i = index">
+                <td>{{c.name}}</td>
+                <td>{{c.credits}}</td>
+                <td>{{c.faculty}}</td>
+                <td>{{c.dept}}</td>
+                <td>
+                  <button class="btn btn-outline-info glass-btn btn-sm me-1" (click)="editCourse(i)" title="Edit"><i class="bi bi-pencil-square"></i> Edit</button>
+                  <button class="btn btn-outline-danger glass-btn btn-sm" (click)="deleteCourse(i)" title="Delete"><i class="bi bi-trash"></i> Delete</button>
+                </td>
+              </tr>
+              <tr *ngIf="courses.length === 0"><td colspan="5" class="text-center text-muted">No courses yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin: Departments (CRUD side-by-side) -->
+    <div *ngSwitchCase="'Departments'">
+      <h1><span class="gradient-text">All Departments</span></h1>
+      <div class="admin-crud-row">
+        <form class="admin-crud-form" (ngSubmit)="addOrUpdateDepartment()" autocomplete="off">
+          <h5 class="mb-3">{{ editingDepartment !== null ? 'Edit Department' : 'Add Department' }}</h5>
+          <div class="mb-3">
+            <label class="form-label">Department Name</label>
+            <input class="form-control glass-input" [(ngModel)]="newDepartment.name" name="deptName" required maxlength="40">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Head of Department</label>
+            <input class="form-control glass-input" [(ngModel)]="newDepartment.head" name="deptHead" required maxlength="40">
+          </div>
+          <div class="d-flex gap-2 justify-content-end">
+            <button type="submit" class="btn btn-primary glass-btn gradient-btn">{{ editingDepartment !== null ? 'Update' : 'Add' }}</button>
+            <button *ngIf="editingDepartment !== null" type="button" class="btn btn-secondary glass-btn" (click)="cancelDepartmentEdit()">Cancel</button>
+          </div>
+        </form>
+        <div class="admin-crud-table">
+          <table class="table glass-table mb-0">
+            <thead>
+          <tr><th>Name</th><th>Head</th><th style="min-width:120px">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let d of departments; let i = index">
+                <td>{{d.name}}</td>
+                <td>{{d.head}}</td>
+                <td>
+                  <button class="btn btn-outline-info glass-btn btn-sm me-1" (click)="editDepartment(i)" title="Edit"><i class="bi bi-pencil-square"></i> Edit</button>
+                  <button class="btn btn-outline-danger glass-btn btn-sm" (click)="deleteDepartment(i)" title="Delete"><i class="bi bi-trash"></i> Delete</button>
+                </td>
+              </tr>
+              <tr *ngIf="departments.length === 0"><td colspan="3" class="text-center text-muted">No departments yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin: Settings -->
+    <div *ngSwitchCase="'Settings'">
+      <h1><span class="gradient-text">Settings</span></h1>
+      <div class="profile-card glassy">
+        <p>System settings and configuration options will be available here.</p>
+        <ul class="feature-list">
+          <li>Manage user roles and permissions</li>
+          <li>Configure system-wide settings (academic year, grading policies, etc.)</li>
+          <li>Manage authentication and security settings</li>
+          <li>Backup and restore data</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Default fallback -->
+    <div *ngSwitchDefault>
+      <h1><span class="gradient-text">{{ featureName }} Coming Soon</span></h1>
+      <p>This page will soon provide the full functionality for the <b>{{ featureName }}</b> module.</p>
+    </div>
+  </ng-container>
+</div>

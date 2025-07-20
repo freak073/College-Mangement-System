@@ -1,0 +1,95 @@
+.login-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #c7d2fe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-glass-card {
+  max-width: 400px;
+  width: 100%;
+  margin: 4rem auto;
+  background: rgba(255,255,255,0.7);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  backdrop-filter: blur(12px);
+  padding: 2.5rem 2rem 2rem 2rem;
+  text-align: center;
+  border: 1.5px solid #e0e7ff;
+  position: relative;
+}
+.login-icon-circle {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #60a5fa 100%);
+  box-shadow: 0 4px 16px #6366f1aa;
+  color: #fff;
+  font-size: 2.2rem;
+  border: 2.5px solid #fff;
+}
+.login-title {
+  margin-bottom: 2rem;
+  color: #3730a3;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.gradient-text {
+  background: linear-gradient(90deg, #6366f1, #60a5fa, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #082c4d;
+  font-weight: 600;
+}
+.form-group input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #b0c4de;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.form-group input:focus {
+  border: 1.5px solid #075fac;
+}
+.btn-3d {
+  width: 100%;
+  margin-top: 0.5rem;
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.7rem;
+  box-shadow: 0 4px 16px #6366f1aa;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.btn-3d:hover {
+  background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+  box-shadow: 0 8px 32px #6366f1cc;
+}
+.switch-link {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+.switch-link a {
+  color: #075fac;
+  text-decoration: underline;
+  font-weight: 600;
+}

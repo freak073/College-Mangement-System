@@ -1,0 +1,89 @@
+.users-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+.users-table th, .users-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+.users-table th {
+  background: #f5f5f5;
+}
+.edit-btn, .delete-btn, .add-btn {
+  padding: 8px 16px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.edit-btn {
+  background: #1976d2;
+  color: #fff;
+}
+.delete-btn {
+  background: #e53935;
+  color: #fff;
+}
+.add-btn {
+  background: #43a047;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.user-form-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.user-form {
+  background: #fff;
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  min-width: 320px;
+}
+.user-form label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.user-form input, .user-form select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+.save-btn {
+  background: #1976d2;
+  color: #fff;
+}
+.cancel-btn {
+  background: #eee;
+  color: #333;
+}
+.error-msg {
+  color: #e53935;
+  margin-bottom: 12px;
+}

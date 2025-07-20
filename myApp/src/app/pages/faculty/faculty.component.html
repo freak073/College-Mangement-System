@@ -1,0 +1,75 @@
+
+<!-- Faculty Management Section (Admin Only) -->
+<section class="faculty-management glassy">
+    <h2 class="section-title">Faculty Management</h2>
+    <!-- Add/Edit Faculty Form -->
+    <form class="faculty-form" (ngSubmit)="onSubmit()" #facultyForm="ngForm">
+      <input type="hidden" name="id" [(ngModel)]="facultyFormModel.id" />
+      <div class="form-row">
+        <label for="facultyName">Name</label>
+        <input id="facultyName" name="facultyName" [(ngModel)]="facultyFormModel.facultyName" required />
+      </div>
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input id="email" name="email" [(ngModel)]="facultyFormModel.email" required type="email" />
+      </div>
+      <div class="form-row">
+        <label for="designation">Designation</label>
+        <input id="designation" name="designation" [(ngModel)]="facultyFormModel.designation" required />
+      </div>
+      <div class="form-row">
+        <label for="specialization">Specialization</label>
+        <input id="specialization" name="specialization" [(ngModel)]="facultyFormModel.specialization" required />
+      </div>
+      <div class="form-row">
+        <label for="phoneNumber">Phone Number</label>
+        <input id="phoneNumber" name="phoneNumber" [(ngModel)]="facultyFormModel.phoneNumber" required />
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{{ facultyFormModel.id ? 'Update' : 'Add' }} Faculty</button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="facultyFormModel.id">Cancel</button>
+      </div>
+    </form>
+
+    <!-- Faculty Table -->
+    <div class="table-responsive">
+      <table class="faculty-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Designation</th>
+            <th>Specialization</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let faculty of faculties">
+            <td>{{ faculty.facultyId }}</td>
+            <td>{{ faculty.facultyName }}</td>
+            <td>{{ faculty.email }}</td>
+            <td>{{ faculty.designation }}</td>
+            <td>{{ faculty.specialization }}</td>
+            <td>{{ faculty.phoneNumber }}</td>
+            <td>
+              <button class="btn btn-sm btn-info" (click)="editFaculty(faculty)">Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="deleteFaculty(faculty.facultyId)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+      <button class="btn" (click)="prevPage()" [disabled]="page === 1">Previous</button>
+      <span>Page {{ page }} of {{ totalPages }}</span>
+      <button class="btn" (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 College Central. All rights reserved.</p>
+  </footer>

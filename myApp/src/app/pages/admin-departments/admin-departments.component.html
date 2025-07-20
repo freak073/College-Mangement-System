@@ -1,0 +1,39 @@
+<section class="admin-departments-management">
+  <h2>Department Management (Admin)</h2>
+  <button (click)="openAddForm()">Add Department</button>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="showForm" class="modal">
+    <h3>{{ formMode === 'add' ? 'Add Department' : 'Edit Department' }}</h3>
+    <form (ngSubmit)="saveDepartment()">
+      <label for="departmentName">Department Name</label>
+      <input id="departmentName" [(ngModel)]="departmentForm.departmentName" name="departmentName" required />
+      <label for="headOfDepartment">Head of Department</label>
+      <input id="headOfDepartment" [(ngModel)]="departmentForm.headOfDepartment" name="headOfDepartment" required />
+      <button type="submit">{{ formMode === 'add' ? 'Add' : 'Update' }}</button>
+      <button type="button" (click)="cancelForm()">Cancel</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Head of Department</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dept of departments">
+        <td>{{ dept.departmentId }}</td>
+        <td>{{ dept.departmentName }}</td>
+        <td>{{ dept.headOfDepartment }}</td>
+        <td>
+          <button (click)="openEditForm(dept)">Edit</button>
+          <button (click)="deleteDepartment(dept)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

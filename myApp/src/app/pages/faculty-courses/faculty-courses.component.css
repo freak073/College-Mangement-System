@@ -1,0 +1,370 @@
+/* Course details panel next to table */
+.faculty-courses-tables-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.course-details-panel {
+  min-width: 270px;
+  max-width: 320px;
+  margin-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.course-details-box {
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px 0 #6366f122;
+  background: rgba(255,255,255,0.98);
+  font-size: 1.08rem;
+  font-weight: 500;
+  color: #22223b;
+  margin-bottom: 1rem;
+}
+.course-details-box h5 {
+  color: #3730a3;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.course-details-box p {
+  margin-bottom: 0.7rem;
+}
+.course-details-box .btn {
+  margin-top: 1rem;
+}
+@media (max-width: 900px) {
+  .faculty-courses-tables-row {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  .course-details-panel {
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+/* Professional Table Design Enhancements */
+.professional-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 4px 32px 0 #6366f122, 0 1.5px 6px 0 #6366f144;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+.professional-table th, .professional-table td {
+  border: none;
+  padding: 1.1rem 1.2rem;
+  font-size: 1.08rem;
+  background: transparent;
+}
+.professional-table th {
+  background: linear-gradient(90deg,#e0e7ff 60%,#f3f4f6 100%);
+  color: #3730a3;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e0e7ff;
+}
+.professional-table tr {
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.professional-table tr:hover {
+  background: rgba(99,102,241,0.07);
+  box-shadow: 0 2px 12px 0 #6366f122;
+  transform: scale(1.01);
+}
+.professional-table td {
+  color: #22223b;
+  font-weight: 500;
+}
+.professional-table .action-badge {
+  min-width: 80px;
+  text-align: center;
+  margin-bottom: 0.2em;
+  margin-right: 0.2em;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: filter 0.15s, box-shadow 0.15s;
+}
+.professional-table .action-badge:active {
+  filter: brightness(0.95);
+  box-shadow: 0 1px 4px 0 #6366f122;
+}
+.professional-table .action-badge.edit {
+  background: linear-gradient(90deg,#f59e42,#fbbf24 80%);
+  color: #fff;
+}
+.professional-table .action-badge.delete {
+  background: linear-gradient(90deg,#ef4444,#f87171 80%);
+  color: #fff;
+}
+.professional-table .action-badge.view {
+  background: linear-gradient(90deg,#10b981,#34d399 80%);
+  color: #fff;
+}
+.professional-table .action-badge:focus {
+  outline: 2px solid #6366f1;
+}
+.modal-content.glass-table-3d {
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 #6366f122;
+  background: rgba(255,255,255,0.98);
+  border: none;
+}
+.modal-header {
+  border-bottom: none;
+  background: linear-gradient(90deg,#e0e7ff 60%,#f3f4f6 100%);
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+.modal-title {
+  color: #3730a3;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.modal-body {
+  color: #22223b;
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+.faculty-courses-tables-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.glass-table-3d {
+  background: rgba(255,255,255,0.92);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px 0 #6366f122;
+  overflow: hidden;
+  width: 100%;
+  max-width: 370px;
+  margin: 0;
+}
+.glass-table-3d + .glass-table-3d {
+  margin-left: 0;
+}
+.table {
+  margin-bottom: 0;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.action-badge {
+  display: inline-block;
+  padding: 0.35em 0.9em;
+  border-radius: 1em;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg,#6366f1,#3b82f6 80%);
+  box-shadow: 0 2px 8px 0 #6366f122;
+  margin-right: 0.4em;
+  margin-bottom: 0.2em;
+  letter-spacing: 0.2px;
+}
+.action-badge.edit {
+  background: linear-gradient(90deg,#f59e42,#fbbf24 80%);
+}
+.action-badge.delete {
+  background: linear-gradient(90deg,#ef4444,#f87171 80%);
+}
+.action-badge.view {
+  background: linear-gradient(90deg,#10b981,#34d399 80%);
+}
+.action-badge.info {
+  background: linear-gradient(90deg,#6366f1,#a5b4fc 80%);
+}
+
+
+/* --- Modern 3D Glassmorphism for Faculty Courses (Uniform, Tabular, Aligned) --- */
+.faculty-courses-hero {
+  padding: 2.5rem 2rem;
+  border-radius: 2.5rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.92) 60%, rgba(99,102,241,0.10) 100%);
+  box-shadow: 0 12px 48px 0 rgba(31,38,135,0.18), 0 2px 8px 0 rgba(99,102,241,0.10);
+  margin: 2.5rem auto;
+  max-width: 900px;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.courses-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  padding-left: 0.5rem;
+}
+.courses-icon-3d {
+  font-size: 2.8rem;
+  color: #6366f1;
+  filter: drop-shadow(0 4px 12px #6366f155);
+  background: linear-gradient(135deg, #e0e7ff 60%, #6366f1 100%);
+  border-radius: 1.2rem;
+  padding: 0.5rem 0.7rem;
+  box-shadow: 0 2px 12px 0 #6366f133;
+}
+.gradient-text-3d {
+  background: linear-gradient(90deg,#3b82f6,#6366f1 70%,#a5b4fc 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #6366f122;
+}
+.glass-form-3d {
+  background: rgba(255,255,255,0.85);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px 0 rgba(99,102,241,0.10);
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  margin-bottom: 2.2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.glass-form-3d .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.form-label-3d {
+  font-weight: 600;
+  color: #3730a3;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+  font-size: 1.08rem;
+}
+.form-control-3d {
+  border-radius: 1.2rem;
+  border: none;
+  background: rgba(243,244,246,0.85);
+  box-shadow: 0 2px 12px 0 #6366f122;
+  font-size: 1.08rem;
+  padding: 0.7rem 1.2rem;
+  margin-bottom: 1.1rem;
+  transition: box-shadow 0.2s;
+  width: 100%;
+}
+.form-control-3d:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #6366f1, 0 2px 8px 0 #6366f122;
+}
+.btn-3d-gradient {
+  background: linear-gradient(90deg,#6366f1,#3b82f6 80%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px 0 #6366f133;
+  padding: 0.7rem 1.8rem;
+  font-size: 1.15rem;
+  transition: transform 0.1s, box-shadow 0.2s;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.btn-3d-gradient:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 24px 0 #6366f144;
+}
+.btn-glass-3d {
+  background: rgba(99,102,241,0.08);
+  color: #3730a3;
+  border: none;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px 0 #6366f122;
+  font-weight: 600;
+  padding: 0.6rem 1.1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-glass-3d:hover {
+  background: #6366f1;
+  color: #fff;
+}
+.glass-table-3d {
+  background: rgba(255,255,255,0.92);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px 0 #6366f122;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.table {
+  margin-bottom: 0;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table-row-3d {
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.table-row-3d:hover {
+  box-shadow: 0 4px 16px 0 #6366f122;
+  transform: scale(1.01);
+  background: rgba(99,102,241,0.07);
+}
+.table th, .table td {
+  vertical-align: middle;
+  font-size: 1.08rem;
+  text-align: center;
+  padding: 0.85rem 0.7rem;
+}
+.table th {
+  font-weight: 700;
+  color: #3730a3;
+  background: rgba(243,244,246,0.7);
+  border: none;
+  letter-spacing: 0.5px;
+}
+.table td {
+  border: none;
+  background: transparent;
+}
+.btn-sm {
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+}
+.text-muted {
+  color: #a1a1aa !important;
+}
+.table thead tr {
+  border-radius: 1.2rem 1.2rem 0 0;
+}
+.table tbody tr:last-child {
+  border-radius: 0 0 1.2rem 1.2rem;
+}
+.table th:first-child, .table td:first-child {
+  text-align: left;
+  padding-left: 1.2rem;
+}
+.table th:last-child, .table td:last-child {
+  padding-right: 1.2rem;
+}
+.table th, .table td {
+  min-width: 120px;
+}

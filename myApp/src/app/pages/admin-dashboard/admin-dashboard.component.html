@@ -1,0 +1,61 @@
+<div class="admin-dashboard-bg">
+  <header class="header glassy">
+    <div class="logo">
+      <img src="assets/images/College-Logo.png" alt="College Logo" />
+      <span>College Central <span class="admin-badge">Admin</span></span>
+    </div>
+    <nav class="nav">
+      <a routerLink="/">Home</a>
+      <a routerLink="/admin-dashboard">Dashboard</a>
+      <a routerLink="/admin-students">Students</a>
+      <a routerLink="/admin-faculty">Faculty</a>
+      <a routerLink="/admin-courses">Courses</a>
+      <a routerLink="/admin-departments">Departments</a>
+      <a routerLink="/settings">Settings</a>
+      <a routerLink="/login">Logout</a>
+    </nav>
+  </header>
+
+  <section class="dashboard-hero">
+    <h1><span class="gradient-text">Welcome, Admin</span></h1>
+    <p>Full access to all college management modules and analytics.</p>
+  </section>
+
+  <section class="dashboard-cards-3d">
+    <div class="dashboard-card-3d" routerLink="/users">
+      <div class="icon-circle"><i class="bi bi-person-lines-fill"></i></div>
+      <h2>Users</h2>
+      <p>Manage all users (students, faculty, departments, admins).</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/admin-students">
+      <div class="icon-circle"><i class="bi bi-people"></i></div>
+      <h2>Students</h2>
+      <p>Manage all student records and enrollment.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/admin-faculty">
+      <div class="icon-circle"><i class="bi bi-person-badge"></i></div>
+      <h2>Faculty</h2>
+      <p>Manage faculty profiles, assignments, and permissions.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/admin-courses">
+      <div class="icon-circle"><i class="bi bi-journal-bookmark"></i></div>
+      <h2>Courses</h2>
+      <p>Create, edit, and assign courses.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/admin-departments">
+      <div class="icon-circle"><i class="bi bi-building"></i></div>
+      <h2>Departments</h2>
+      <p>Oversee all departments and their structure.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/reports">
+      <div class="icon-circle"><i class="bi bi-bar-chart"></i></div>
+      <h2>Reports & Analytics</h2>
+      <p>View system-wide analytics and reports.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/settings">
+      <div class="icon-circle"><i class="bi bi-gear"></i></div>
+      <h2>System Settings</h2>
+      <p>Manage roles, permissions, and system configuration.</p>
+    </div>
+  </section>
+</div>

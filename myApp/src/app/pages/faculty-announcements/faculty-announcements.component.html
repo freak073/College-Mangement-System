@@ -1,0 +1,41 @@
+
+<div class="feature-hero glassy">
+  <h1 class="gradient-text">Faculty Announcements</h1>
+
+  <form class="glass-form mb-4" (ngSubmit)="addOrUpdateAnnouncement()" autocomplete="off">
+    <div class="row g-2 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label">Title</label>
+        <input class="form-control glass-input" [(ngModel)]="newAnnouncement.title" name="title" required maxlength="50">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Date</label>
+        <input class="form-control glass-input" type="date" [(ngModel)]="newAnnouncement.date" name="date" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Message</label>
+        <input class="form-control glass-input" [(ngModel)]="newAnnouncement.msg" name="msg" required maxlength="120">
+      </div>
+      <div class="col-md-1 d-flex gap-2">
+        <button type="submit" class="btn btn-primary glass-btn gradient-btn shadow-lg">
+          {{ editIndex !== null ? 'Update' : 'Add' }}
+        </button>
+        <button *ngIf="editIndex !== null" type="button" class="btn btn-secondary glass-btn" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+  </form>
+
+  <ul class="list-group glass-list">
+    <li class="list-group-item d-flex justify-content-between align-items-center glassy-3d mb-2" *ngFor="let a of announcements; let i = index">
+      <div>
+        <b>{{a.title}}</b> <span class="text-muted">({{a.date}})</span><br>
+        <span>{{a.msg}}</span>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-outline-info glass-btn me-1" (click)="editAnnouncement(i)" title="Edit"><i class="bi bi-pencil-square"></i></button>
+        <button class="btn btn-outline-danger glass-btn" (click)="deleteAnnouncement(i)" title="Delete"><i class="bi bi-trash"></i></button>
+      </div>
+    </li>
+    <li *ngIf="announcements.length === 0" class="list-group-item text-center text-muted glassy-3d">No announcements yet.</li>
+  </ul>
+</div>

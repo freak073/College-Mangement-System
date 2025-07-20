@@ -1,0 +1,154 @@
+
+body {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f5f7fa 100%);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background: #222;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 24px #0002;
+}
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-right: 2rem;
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: #90cdf4;
+}
+.nav-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.courses-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #0002, 0 1.5px 0 #90cdf4;
+}
+.add-btn {
+  background: linear-gradient(90deg, #90cdf4 0%, #3b82f6 100%);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px #90cdf480;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-btn:hover {
+  background: linear-gradient(90deg, #3b82f6 0%, #90cdf4 100%);
+}
+
+.table-3d-wrapper {
+  perspective: 1200px;
+  margin-top: 1rem;
+}
+.table-3d {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #90cdf480, 0 1.5px 0 #3b82f6;
+  transform: rotateX(4deg) scale(1.01);
+  overflow: hidden;
+}
+.table-3d th, .table-3d td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e7ff;
+  text-align: left;
+  font-size: 1.05rem;
+}
+.table-3d th {
+  background: linear-gradient(90deg, #3b82f6 0%, #90cdf4 100%);
+  color: #fff;
+  font-weight: 700;
+  border-bottom: 2px solid #90cdf4;
+}
+.table-3d tr:last-child td {
+  border-bottom: none;
+}
+.edit-btn, .delete-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #90cdf480;
+  transition: background 0.2s;
+}
+.edit-btn {
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e42 100%);
+  color: #fff;
+}
+.edit-btn:hover {
+  background: linear-gradient(90deg, #f59e42 0%, #fbbf24 100%);
+}
+.delete-btn {
+  background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+  color: #fff;
+}
+.delete-btn:hover {
+  background: linear-gradient(90deg, #f87171 0%, #ef4444 100%);
+}
+.error {
+  color: #ef4444;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+.modal {
+  background: #f5f7fa;
+  border: 2px solid #90cdf4;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+  box-shadow: 0 4px 24px #90cdf480;
+}
+.save-btn {
+  background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px #34d39980;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.save-btn:hover {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+}
+.cancel-btn {
+  background: linear-gradient(90deg, #64748b 0%, #94a3b8 100%);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px #64748b80;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cancel-btn:hover {
+  background: linear-gradient(90deg, #94a3b8 0%, #64748b 100%);
+}

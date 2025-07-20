@@ -1,0 +1,53 @@
+<div class="faculty-dashboard-bg">
+  <header class="header glassy">
+    <div class="logo">
+      <img src="assets/images/College-Logo.png" alt="College Logo" />
+      <span>College Central <span class="faculty-badge">Faculty</span></span>
+    </div>
+    <nav class="nav">
+      <a routerLink="/">Home</a>
+      <a routerLink="/faculty-dashboard">Dashboard</a>
+      <a routerLink="/courses">Courses</a>
+      <a routerLink="/students">Students</a>
+      <a routerLink="/announcements">Announcements</a>
+      <a routerLink="/login">Logout</a>
+    </nav>
+  </header>
+
+  <section class="dashboard-hero">
+    <h1><span class="gradient-text">Welcome to your Faculty Dashboard</span></h1>
+    <p>Manage your courses, attendance, grades, and more.</p>
+  </section>
+
+  <section class="dashboard-cards-3d">
+    <div class="dashboard-card-3d" routerLink="/faculty-courses">
+      <div class="icon-circle"><i class="bi bi-journal-bookmark"></i></div>
+      <h2>My Courses</h2>
+      <p>View and manage your assigned courses.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/attendance">
+      <div class="icon-circle"><i class="bi bi-clipboard-check"></i></div>
+      <h2>Attendance</h2>
+      <p>Mark and review student attendance.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/gradebook">
+      <div class="icon-circle"><i class="bi bi-bar-chart-line"></i></div>
+      <h2>Gradebook</h2>
+      <p>Enter and update student grades.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/faculty-announcements">
+      <div class="icon-circle"><i class="bi bi-megaphone"></i></div>
+      <h2>Announcements</h2>
+      <p>Post and view important updates.</p>
+    </div>
+    <div class="dashboard-card-3d" routerLink="/faculty-profile">
+      <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
+      <h2>Profile</h2>
+      <p>View and update your personal information.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 College Central. All rights reserved.</p>
+  </footer>
+</div>

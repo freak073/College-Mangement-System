@@ -1,0 +1,67 @@
+<!-- Admin Students Management Section -->
+<section class="admin-students-management glassy">
+  <h2 class="section-title">Student Management (Admin)</h2>
+  <!-- Add/Edit Student Form -->
+  <form class="student-form">
+    <div class="form-row">
+      <label for="studentName">Name</label>
+      <input id="studentName" name="studentName" required />
+    </div>
+    <div class="form-row">
+      <label for="email">Email</label>
+      <input id="email" name="email" required type="email" />
+    </div>
+    <div class="form-row">
+      <label for="department">Department</label>
+      <input id="department" name="department" required />
+    </div>
+    <div class="form-row">
+      <label for="enrollmentNumber">Enrollment Number</label>
+      <input id="enrollmentNumber" name="enrollmentNumber" required />
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Add Student</button>
+      <button type="button" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
+
+  <!-- Students Table -->
+  <div class="table-responsive">
+    <table class="students-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Enrollment Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.studentId }}</td>
+          <td>{{ student.studentName }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.departmentName }}</td>
+          <td>{{ student.course }}</td>
+          <td>
+            <button class="btn btn-sm btn-info" (click)="editStudent(student)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteStudent(student.studentId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button class="btn" disabled>Previous</button>
+    <span>Page 1 of 1</span>
+    <button class="btn" disabled>Next</button>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>&copy; 2025 College Central. All rights reserved.</p>
+</footer>

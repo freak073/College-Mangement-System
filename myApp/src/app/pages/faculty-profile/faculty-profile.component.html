@@ -1,0 +1,56 @@
+
+<div class="feature-hero glassy">
+  <h1 class="gradient-text">Faculty Profile</h1>
+  <div class="profile-upi-card glassy-3d">
+    <div class="upi-header">
+      <img [src]="profile.avatarUrl" alt="Avatar" class="upi-avatar shadow">
+      <div class="upi-info">
+        <h2 class="upi-name">{{ profile.name }}</h2>
+        <span class="upi-designation">{{ profile.designation }}</span>
+      </div>
+      <button *ngIf="!editMode" class="btn btn-outline-primary glass-btn gradient-btn ms-auto" (click)="startEdit()"><i class="bi bi-pencil"></i> Edit</button>
+    </div>
+
+    <form *ngIf="editMode" (ngSubmit)="saveProfile()" class="mt-3">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Name</label>
+          <input class="form-control glass-input" [(ngModel)]="tempProfile.name" name="name" required maxlength="40">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input class="form-control glass-input" [(ngModel)]="tempProfile.email" name="email" required type="email">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Designation</label>
+          <input class="form-control glass-input" [(ngModel)]="tempProfile.designation" name="designation" required maxlength="30">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Specialization</label>
+          <input class="form-control glass-input" [(ngModel)]="tempProfile.specialization" name="specialization" required maxlength="30">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Phone</label>
+          <input class="form-control glass-input" [(ngModel)]="tempProfile.phone" name="phone" required maxlength="15">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Avatar URL</label>
+          <input class="form-control glass-input" [(ngModel)]="tempProfile.avatarUrl" name="avatarUrl" required type="url">
+        </div>
+      </div>
+      <div class="mt-4 d-flex gap-2 justify-content-end">
+        <button type="submit" class="btn btn-primary glass-btn gradient-btn">Save</button>
+        <button type="button" class="btn btn-secondary glass-btn" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+
+    <div *ngIf="!editMode" class="upi-details mt-3">
+      <div class="row g-3">
+        <div class="col-md-6"><b>Email:</b> {{ profile.email }}</div>
+        <div class="col-md-6"><b>Phone:</b> {{ profile.phone }}</div>
+        <div class="col-md-6"><b>Specialization:</b> {{ profile.specialization }}</div>
+        <div class="col-md-6"><b>Designation:</b> {{ profile.designation }}</div>
+      </div>
+    </div>
+  </div>
+</div>

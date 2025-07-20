@@ -1,0 +1,61 @@
+<div class="courses-container">
+  <h2>Courses</h2>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <nav class="navbar">
+    <a class="nav-link" routerLink="/admin-dashboard">&#8592; Back to Dashboard</a>
+    <span class="nav-title">Course Management</span>
+  </nav>
+
+  <div class="courses-container">
+    <h2>Courses</h2>
+    <button class="add-btn" (click)="openAddForm()">Add Course</button>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div class="table-3d-wrapper">
+      <table class="table-3d">
+        <thead>
+          <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Credits</th>
+            <th>Durations</th>
+            <th>Faculty ID</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of courses">
+            <td>{{ course.courseId }}</td>
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.credits }}</td>
+            <td>{{ course.durations }}</td>
+            <td>{{ course.facultyId }}</td>
+            <td>
+              <button class="edit-btn" (click)="openEditForm(course)">Edit</button>
+              <button class="delete-btn" (click)="deleteCourse(course)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="showForm" class="modal">
+      <h3>{{ formMode === 'add' ? 'Add Course' : 'Edit Course' }}</h3>
+      <form (ngSubmit)="saveCourse()">
+        <label for="courseName">Course Name</label>
+        <input id="courseName" [(ngModel)]="formData.courseName" name="courseName" required />
+
+        <label for="credits">Credits</label>
+        <input id="credits" [(ngModel)]="formData.credits" name="credits" required type="number" />
+
+        <label for="durations">Durations</label>
+        <input id="durations" [(ngModel)]="formData.durations" name="durations" required />
+
+        <label for="facultyId">Faculty ID</label>
+        <input id="facultyId" [(ngModel)]="formData.facultyId" name="facultyId" required type="number" />
+
+        <button type="submit" class="save-btn">{{ formMode === 'add' ? 'Add' : 'Update' }} Course</button>
+        <button type="button" class="cancel-btn" (click)="cancelForm()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
