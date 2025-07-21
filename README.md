@@ -12,7 +12,7 @@ A comprehensive college management system built with **Spring Boot** backend and
 │  ├── Student Dashboard       │  ├── REST API Controllers    │
 │  ├── Faculty Dashboard       │  ├── JWT Authentication      │
 │  ├── Admin Dashboard         │  ├── Spring Security         │
-│  ├── Course Management       │  ├── JPA/Hibernate          │
+│  ├── Course Management       │  ├── JPA/Hibernate           │
 │  └── User Management         │  └── MySQL Database          │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -69,7 +69,7 @@ A comprehensive college management system built with **Spring Boot** backend and
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/[username]/College-Management-System.git
+   git clone https://github.com/freak073/College-Management-System.git
    cd College-Management-System
    ```
 
@@ -102,9 +102,9 @@ A comprehensive college management system built with **Spring Boot** backend and
 
 4. **Access the Application**
    - **Frontend**: `http://localhost:4200`
-   - **Backend API**: `http://localhost:8080`
-   - **Swagger UI**: `http://localhost:8080/swagger-ui.html`
-   - **Health Check**: `http://localhost:8080/actuator/health`
+   - **Backend API**: `http://localhost:4951`
+   - **Swagger UI**: `http://localhost:4951/swagger-ui.html`
+   - **Health Check**: `http://localhost:4951/actuator/health`
 
 ## 🏗️ Project Structure
 

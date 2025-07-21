@@ -41,10 +41,10 @@ The College Management System is a full-stack web application built using Spring
 
 ### Security Architecture
 ```
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐
-│   Client    │───▶│ JWT Filter   │───▶│ Controller  │
-│ (Frontend)  │    │ (Security)   │    │ (Endpoint)  │
-└─────────────┘    └──────────────┘    └─────────────┘
+┌─────────────┐     ┌──────────────┐      ┌─────────────┐
+│   Client    │───▶ | JWT Filter   |───▶ |Controller   │
+│ (Frontend)  │     │ (Security)   |      │ (Endpoint)  │
+└─────────────┘     └──────────────┘      └─────────────┘
                            │
                            ▼
                    ┌──────────────┐
