@@ -226,7 +226,7 @@ The system follows a three-tier architecture pattern:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Presentation Layer                        │
+│                    Presentation Layer                       │
 │                   (Angular Frontend)                        │
 ├─────────────────────────────────────────────────────────────┤
 │                    Business Logic Layer                     │
@@ -966,10 +966,10 @@ Key lessons learned during the development process:
 **Document Information:**
 - **Title:** College Management System - Project Thesis
 - **Version:** 1.0
-- **Date:** January 2025
-- **Authors:** Development Team
-- **Institution:** [Your Institution Name]
-- **Department:** Computer Science and Engineering
+- **Date:** July 2025
+- **Authors:** Varun K P
+- **Institution:** EDUBRIDGE | DIGITAL ACADEMY
+- **Department:** AIML
 
 **Appendices:**
 - Appendix A: Complete API Documentation
