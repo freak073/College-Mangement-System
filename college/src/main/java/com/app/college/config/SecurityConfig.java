@@ -37,6 +37,9 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // Allow all OPTIONS requests for CORS preflight
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+
                         //Swagger/OpenAPI endpoints (no auth required)
                         .requestMatchers(
                                 "/v3/api-docs/**",

@@ -12,6 +12,9 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -44,6 +47,17 @@ public class AuthController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         String token = jwtUtils.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        // Get the user's role (assuming userDetails.getAuthorities() returns roles)
+        String role = userDetails.getAuthorities().stream()
+                .findFirst()
+                .map(auth -> auth.getAuthority())
+                .orElse("");
+
+        // Return both token and role
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("role", role);
+
+        return ResponseEntity.ok(response);
     }
 }
