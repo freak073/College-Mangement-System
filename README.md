@@ -1,82 +1,184 @@
-# 🎓 College Management System
+# 🎓 College Management System - Full Stack Application
 
-A comprehensive college management system built with Spring Boot, featuring secure authentication, course management, and modern REST API architecture.
+A comprehensive college management system built with **Spring Boot** backend and **Angular** frontend, featuring secure authentication, complete academic management, and modern web architecture.
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    COLLEGE MANAGEMENT SYSTEM                │
+├─────────────────────────────────────────────────────────────┤
+│  Frontend (Angular)          │  Backend (Spring Boot)       │
+│  ├── Student Dashboard       │  ├── REST API Controllers    │
+│  ├── Faculty Dashboard       │  ├── JWT Authentication      │
+│  ├── Admin Dashboard         │  ├── Spring Security         │
+│  ├── Course Management       │  ├── JPA/Hibernate          │
+│  └── User Management         │  └── MySQL Database          │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## ✨ Features
 
-- **🔐 JWT Authentication & Authorization** - Secure login system with role-based access control
-- **👥 User Management** - Student and admin user registration and management
-- **📚 Course Management** - Complete CRUD operations for courses
-- **🛡️ Spring Security Integration** - Protected endpoints with JWT tokens
-- **📖 API Documentation** - Interactive Swagger/OpenAPI documentation
-- **🌐 CORS Support** - Frontend integration ready (Angular compatible)
-- **📊 Monitoring** - Spring Boot Actuator for health checks and metrics
+### 🔐 Authentication & Security
+- **JWT Token-based Authentication** - Secure, stateless authentication
+- **Role-based Authorization** - Student, Faculty, and Admin roles
+- **Password Encryption** - BCrypt hashing for secure password storage
+- **Session Management** - Stateless session handling
+
+### 👥 User Management
+- **Multi-role System** - Students, Faculty, and Administrators
+- **User Registration & Login** - Secure signup and authentication
+- **Profile Management** - Update personal information and preferences
+- **User CRUD Operations** - Complete user lifecycle management
+
+### 📚 Academic Management
+- **Course Management** - Create, read, update, delete courses
+- **Department Management** - Organize courses by departments
+- **Faculty Management** - Assign faculty to courses and departments
+- **Student Enrollment** - Enroll students in courses
+- **Attendance Tracking** - Monitor student attendance
+- **Grade Management** - Record and manage student grades
+
+### 🎯 Dashboard Features
+- **Student Dashboard** - View enrolled courses, grades, and announcements
+- **Faculty Dashboard** - Manage courses, students, and announcements
+- **Admin Dashboard** - System-wide management and analytics
+- **Real-time Updates** - Dynamic content updates
+
+### 🌐 Modern Web Features
+- **Responsive Design** - Mobile-friendly interface
+- **RESTful API** - Clean, documented API endpoints
+- **CORS Support** - Cross-origin resource sharing
+- **API Documentation** - Interactive Swagger/OpenAPI docs
+- **Monitoring** - Health checks and application metrics
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
+**Backend Requirements:**
 - Java 17 or higher
 - Maven 3.6+
 - MySQL 8.0+
-- Git
 
-### Installation
+**Frontend Requirements:**
+- Node.js 16+ and npm
+- Angular CLI 15+
+
+### Installation & Setup
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/[username]/College-Management-System-Using-SpringBoot.git
-   cd College-Management-System-Using-SpringBoot/college
+   git clone https://github.com/[username]/College-Management-System.git
+   cd College-Management-System
    ```
 
-2. **Configure Database**
-   - Create a MySQL database named `college_db`
-   - Update `application.properties` with your database credentials:
-   ```properties
+2. **Backend Setup (Spring Boot)**
+   ```bash
+   cd college
+   
+   # Configure Database
+   # Create MySQL database named 'college_db'
+   # Update src/main/resources/application.properties:
    spring.datasource.url=jdbc:mysql://localhost:3306/college_db
    spring.datasource.username=your_username
    spring.datasource.password=your_password
-   ```
-
-3. **Build and Run**
-   ```bash
+   
+   # Build and Run
    mvn clean install
    mvn spring-boot:run
    ```
 
+3. **Frontend Setup (Angular)**
+   ```bash
+   cd myApp
+   
+   # Install dependencies
+   npm install
+   
+   # Start development server
+   ng serve
+   ```
+
 4. **Access the Application**
-   - API Base URL: `http://localhost:8080`
-   - Swagger UI: `http://localhost:8080/swagger-ui.html`
-   - Health Check: `http://localhost:8080/actuator/health`
+   - **Frontend**: `http://localhost:4200`
+   - **Backend API**: `http://localhost:8080`
+   - **Swagger UI**: `http://localhost:8080/swagger-ui.html`
+   - **Health Check**: `http://localhost:8080/actuator/health`
 
-## 🏗️ Architecture
+## 🏗️ Project Structure
 
-### Project Structure
+### Full Stack Architecture
 ```
-college/
-├── src/main/java/com/app/college/
-│   ├── config/          # Configuration classes
-│   │   ├── CorsConfig.java
-│   │   └── SecurityConfig.java
-│   ├── controller/      # REST Controllers
-│   │   └── AuthController.java
-│   ├── service/         # Business Logic
-│   │   └── CourseService.java
-│   ├── repository/      # Data Access Layer
-│   ├── model/          # Entity Classes
-│   └── dto/            # Data Transfer Objects
-└── src/main/resources/
-    └── application.properties
+College-Management-System/
+├── college/                          # Spring Boot Backend
+│   ├── src/main/java/com/app/college/
+│   │   ├── config/                   # Configuration classes
+│   │   │   ├── CorsConfig.java       # CORS configuration
+│   │   │   ├── SecurityConfig.java   # Security configuration
+│   │   │   ├── JwtAuthenticationFilter.java
+│   │   │   └── OpenApiConfig.java    # Swagger configuration
+│   │   ├── controller/               # REST Controllers
+│   │   │   ├── AuthController.java   # Authentication endpoints
+│   │   │   ├── CourseController.java # Course management
+│   │   │   ├── StudentController.java# Student management
+│   │   │   ├── FacultyController.java# Faculty management
+│   │   │   └── DepartmentController.java
+│   │   ├── service/                  # Business Logic Layer
+│   │   │   ├── UserService.java
+│   │   │   ├── CourseService.java
+│   │   │   ├── StudentService.java
+│   │   │   └── FacultyService.java
+│   │   ├── repository/               # Data Access Layer
+│   │   │   ├── UserRepository.java
+│   │   │   ├── CourseRepository.java
+│   │   │   └── StudentRepository.java
+│   │   ├── model/                    # Entity Classes
+│   │   │   ├── User.java
+│   │   │   ├── Course.java
+│   │   │   ├── Student.java
+│   │   │   └── Faculty.java
+│   │   ├── dto/                      # Data Transfer Objects
+│   │   └── security/                 # Security utilities
+│   └── src/main/resources/
+│       └── application.properties
+│
+├── myApp/                            # Angular Frontend
+│   ├── src/app/
+│   │   ├── pages/                    # Page Components
+│   │   │   ├── login/                # Login page
+│   │   │   ├── dashboard/            # Main dashboard
+│   │   │   ├── admin-dashboard/      # Admin dashboard
+│   │   │   ├── courses/              # Course management
+│   │   │   ├── students/             # Student management
+│   │   │   ├── faculty/              # Faculty management
+│   │   │   └── departments/          # Department management
+│   │   ├── services/                 # Angular Services
+│   │   │   ├── auth.service.ts       # Authentication service
+│   │   │   ├── course.service.ts     # Course service
+│   │   │   ├── student.service.ts    # Student service
+│   │   │   └── faculty.service.ts    # Faculty service
+│   │   ├── models/                   # TypeScript interfaces
+│   │   └── app-routing.module.ts     # Route configuration
+│   ├── angular.json
+│   ├── package.json
+│   └── proxy.conf.json               # Proxy configuration
+│
+├── README.md                         # This file
+├── DOCUMENTATION.md                  # Technical documentation
+└── API_GUIDE.md                     # API reference guide
 ```
 
 ### Security Architecture
 - **JWT-based Authentication** - Stateless authentication using JSON Web Tokens
-- **Role-based Authorization** - Different access levels for students and admins
+- **Role-based Authorization** - Student, Faculty, and Admin access levels
 - **CORS Configuration** - Configured for Angular frontend on `localhost:4200`
-- **Protected Endpoints** - All `/api/users/**` endpoints require authentication
+- **HTTP Interceptors** - Automatic token attachment for API calls
+- **Route Guards** - Frontend route protection based on authentication
 
-## 🔧 Technologies and Versions
+## 🔧 Technology Stack
 
+### Backend Technologies
 | Technology                 | Version         | Purpose                                          |
 |----------------------------|-----------------|--------------------------------------------------|
 | Java                       | 17              | Core programming language                        |
@@ -91,9 +193,29 @@ college/
 | Swagger/OpenAPI            | 2.5.0           | API documentation                                |
 | Jackson JSR310             | Included        | Java 8+ Date/Time JSON serialization            |
 | Spring Boot Actuator       | Starter         | Application monitoring and metrics               |
-| JUnit                      | Starter         | Unit and integration testing              
+| JUnit                      | Starter         | Unit and integration testing                     |
 
-## 🔌 API Endpoints
+### Frontend Technologies
+| Technology                 | Version         | Purpose                                          |
+|----------------------------|-----------------|--------------------------------------------------|
+| Angular                    | 15+             | Frontend framework                               |
+| TypeScript                 | 4.8+            | Type-safe JavaScript development                 |
+| Angular CLI                | 15+             | Development tools and build system               |
+| Angular Router             | 15+             | Client-side routing                              |
+| Angular HTTP Client        | 15+             | HTTP communication with backend                  |
+| RxJS                       | 7+              | Reactive programming with observables            |
+| Bootstrap/CSS3             | Latest          | Responsive UI styling                            |
+| Node.js                    | 16+             | JavaScript runtime for development               |
+| npm                        | 8+              | Package manager                                  |
+
+### Database & Infrastructure
+| Technology                 | Version         | Purpose                                          |
+|----------------------------|-----------------|--------------------------------------------------|
+| MySQL                      | 8.0+            | Primary database                                 |
+| Hibernate                  | 6.x             | ORM framework                                    |
+| HikariCP                   | Included        | Connection pooling                               |
+
+## 🔌 API Endpoints Overview
 
 ### Authentication Endpoints
 | Method | Endpoint | Description | Access |
@@ -101,11 +223,45 @@ college/
 | POST | `/api/auth/signup` | Register new user | Public |
 | POST | `/api/auth/login` | User login | Public |
 
-### Protected Endpoints
+### Course Management
 | Method | Endpoint | Description | Access |
 |--------|----------|-------------|---------|
-| GET | `/api/users/**` | User operations | Authenticated |
 | GET | `/api/courses` | Get all courses | Authenticated |
+| POST | `/api/courses` | Create new course | Admin |
+| PUT | `/api/courses/{id}` | Update course | Admin |
+| DELETE | `/api/courses/{id}` | Delete course | Admin |
+
+### Student Management
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|---------|
+| GET | `/api/students` | Get all students | Admin/Faculty |
+| POST | `/api/students` | Create new student | Admin |
+| PUT | `/api/students/{id}` | Update student | Admin |
+| DELETE | `/api/students/{id}` | Delete student | Admin |
+
+### Faculty Management
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|---------|
+| GET | `/api/faculty` | Get all faculty | Admin |
+| POST | `/api/faculty` | Create new faculty | Admin |
+| PUT | `/api/faculty/{id}` | Update faculty | Admin |
+| DELETE | `/api/faculty/{id}` | Delete faculty | Admin |
+
+### Department Management
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|---------|
+| GET | `/api/departments` | Get all departments | Authenticated |
+| POST | `/api/departments` | Create new department | Admin |
+| PUT | `/api/departments/{id}` | Update department | Admin |
+| DELETE | `/api/departments/{id}` | Delete department | Admin |
+
+### Enrollment Management
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|---------|
+| GET | `/api/enrollments` | Get all enrollments | Admin/Faculty |
+| POST | `/api/enrollments` | Enroll student | Admin |
+| PUT | `/api/enrollments/{id}` | Update enrollment | Admin |
+| DELETE | `/api/enrollments/{id}` | Delete enrollment | Admin |
 
 ### Example API Usage
 
@@ -168,15 +324,35 @@ The application uses JPA/Hibernate for automatic schema generation. On first run
 - **Method-level Security** - Fine-grained access control
 - **Session Management** - Stateless session policy
 
-## 📚 Frontend Integration
+## � ️ Frontend Features
 
-This backend is designed to work with an Angular frontend. The CORS configuration allows requests from `http://localhost:4200`.
+### User Interfaces
+- **Landing Page** - Welcome page with system overview
+- **Login/Signup** - User authentication interface
+- **Student Dashboard** - Personal academic information
+- **Faculty Dashboard** - Course and student management
+- **Admin Dashboard** - System-wide administration
 
-### Frontend Setup (Angular)
-1. Install Angular CLI: `npm install -g @angular/cli`
-2. Navigate to the `myApp` directory
-3. Install dependencies: `npm install`
-4. Start development server: `ng serve`
+### Key Components
+- **Course Management** - CRUD operations for courses
+- **Student Management** - Student registration and profile management
+- **Faculty Management** - Faculty profiles and course assignments
+- **Department Management** - Academic department organization
+- **Attendance Tracking** - Student attendance monitoring
+- **Grade Management** - Academic performance tracking
+- **User Management** - System user administration
+
+### Angular Services
+- **AuthService** - Authentication and authorization
+- **CourseService** - Course-related API calls
+- **StudentService** - Student management operations
+- **FacultyService** - Faculty management operations
+- **UserService** - User management operations
+
+### Routing & Navigation
+- **Role-based Routing** - Different routes for different user roles
+- **Route Guards** - Authentication-based access control
+- **Lazy Loading** - Optimized module loading
 
 ## 🐛 Troubleshooting
 

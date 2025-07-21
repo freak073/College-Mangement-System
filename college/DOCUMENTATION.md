@@ -1,4 +1,4 @@
-# 📋 College Management System - Technical Documentation
+# 📋 College Management System - Full Stack Technical Documentation
 
 ## Table of Contents
 1. [System Overview](#system-overview)
@@ -11,7 +11,7 @@
 
 ## System Overview
 
-The College Management System is a RESTful web application built using Spring Boot 3.5.0 that provides comprehensive management capabilities for educational institutions. The system implements modern security practices with JWT authentication and role-based authorization.
+The College Management System is a full-stack web application built using Spring Boot 3.5.0 backend and Angular 15+ frontend that provides comprehensive management capabilities for educational institutions. The system implements modern security practices with JWT authentication, role-based authorization, and responsive user interfaces for students, faculty, and administrators.
 
 ### Key Components
 - **Authentication Service**: JWT-based user authentication
@@ -354,3 +354,450 @@ logging.file.name=logs/college-management.log
 ---
 
 For additional support or questions, please refer to the project repository or contact the development team.
+## Fro
+ntend Architecture
+
+### Angular Application Structure
+```
+myApp/
+├── src/app/
+│   ├── pages/                    # Page Components
+│   │   ├── login/                # Authentication pages
+│   │   ├── signup/
+│   │   ├── dashboard/            # Main dashboard
+│   │   ├── admin-dashboard/      # Admin-specific dashboard
+│   │   ├── courses/              # Course management
+│   │   ├── students/             # Student management
+│   │   ├── faculty/              # Faculty management
+│   │   ├── departments/          # Department management
+│   │   ├── attendance/           # Attendance tracking
+│   │   └── gradebook/            # Grade management
+│   ├── services/                 # Angular Services
+│   │   ├── auth.service.ts       # Authentication service
+│   │   ├── course.service.ts     # Course operations
+│   │   ├── student.service.ts    # Student operations
+│   │   ├── faculty.service.ts    # Faculty operations
+│   │   ├── department.service.ts # Department operations
+│   │   └── user.service.ts       # User management
+│   ├── models/                   # TypeScript interfaces
+│   │   ├── user.model.ts
+│   │   ├── course.model.ts
+│   │   ├── student.model.ts
+│   │   └── faculty.model.ts
+│   ├── guards/                   # Route guards
+│   │   └── auth.guard.ts
+│   └── interceptors/             # HTTP interceptors
+│       └── auth.interceptor.ts
+├── angular.json                  # Angular configuration
+├── package.json                  # Dependencies
+└── proxy.conf.json              # Development proxy
+```
+
+### Component Architecture
+
+**Dashboard Components:**
+- **Student Dashboard**: Personal academic information, enrolled courses, grades
+- **Faculty Dashboard**: Assigned courses, student management, announcements
+- **Admin Dashboard**: System overview, user management, reports
+
+**Management Components:**
+- **Course Management**: CRUD operations for courses
+- **Student Management**: Student registration, profile management
+- **Faculty Management**: Faculty profiles, course assignments
+- **Department Management**: Academic department organization
+
+**Shared Components:**
+- **Navigation**: Role-based navigation menu
+- **Forms**: Reusable form components
+- **Tables**: Data display with pagination and sorting
+- **Modals**: Confirmation dialogs and forms
+
+### Service Layer
+
+**Authentication Service:**
+```typescript
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private apiUrl = 'http://localhost:8080/api/auth';
+  
+  constructor(private http: HttpClient) {}
+  
+  login(credentials: LoginRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials);
+  }
+  
+  signup(userData: SignupRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/signup`, userData);
+  }
+  
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+  }
+  
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
+  
+  getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+}
+```
+
+**HTTP Interceptor:**
+```typescript
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('token');
+    
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    }
+    
+    return next.handle(request);
+  }
+}
+```
+
+### Routing Configuration
+
+**App Routing Module:**
+```typescript
+const routes: Routes = [
+  { path: '', component: LandingComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'admin-dashboard', 
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
+  },
+  { 
+    path: 'courses', 
+    component: CoursesComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'students', 
+    component: StudentsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN', 'FACULTY'] }
+  },
+  { 
+    path: 'faculty', 
+    component: FacultyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
+  }
+];
+```
+
+## Full Stack Integration
+
+### API Communication
+
+**Frontend-Backend Communication Flow:**
+```
+Angular Component → Service → HTTP Client → Backend API
+                                              ↓
+Database ← Repository ← Service ← Controller ←
+```
+
+**Example Integration - Course Management:**
+
+**Frontend Service:**
+```typescript
+getCourses(): Observable<Course[]> {
+  return this.http.get<Course[]>(`${this.apiUrl}/courses`);
+}
+
+addCourse(course: CourseRequest): Observable<Course> {
+  return this.http.post<Course>(`${this.apiUrl}/courses`, course);
+}
+```
+
+**Backend Controller:**
+```java
+@GetMapping
+public List<CourseDTO> getAllCourses() {
+    return courseService.getAllCourses();
+}
+
+@PostMapping
+@PreAuthorize("hasRole('ADMIN')")
+public CourseDTO createCourse(@RequestBody CourseRequestDTO request) {
+    return courseService.addCourse(request);
+}
+```
+
+### State Management
+
+**Local Storage for Authentication:**
+```typescript
+// Store authentication data
+localStorage.setItem('token', response.token);
+localStorage.setItem('role', response.role);
+
+// Retrieve authentication data
+const token = localStorage.getItem('token');
+const role = localStorage.getItem('role');
+```
+
+**Component State Management:**
+```typescript
+export class CoursesComponent implements OnInit {
+  courses: Course[] = [];
+  loading = false;
+  error: string | null = null;
+  
+  constructor(private courseService: CourseService) {}
+  
+  ngOnInit(): void {
+    this.loadCourses();
+  }
+  
+  loadCourses(): void {
+    this.loading = true;
+    this.courseService.getCourses().subscribe({
+      next: (data) => {
+        this.courses = data;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = 'Failed to load courses';
+        this.loading = false;
+      }
+    });
+  }
+}
+```
+
+## Development Workflow
+
+### Frontend Development Setup
+
+1. **Install Dependencies:**
+   ```bash
+   cd myApp
+   npm install
+   ```
+
+2. **Development Server:**
+   ```bash
+   ng serve
+   # Application runs on http://localhost:4200
+   ```
+
+3. **Build for Production:**
+   ```bash
+   ng build --prod
+   ```
+
+### Backend Development Setup
+
+1. **Database Setup:**
+   ```sql
+   CREATE DATABASE college_db;
+   ```
+
+2. **Application Configuration:**
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/college_db
+   spring.datasource.username=root
+   spring.datasource.password=password
+   ```
+
+3. **Run Application:**
+   ```bash
+   cd college
+   mvn spring-boot:run
+   # Application runs on http://localhost:8080
+   ```
+
+### Development Proxy Configuration
+
+**proxy.conf.json:**
+```json
+{
+  "/api/*": {
+    "target": "http://localhost:8080",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+```
+
+**Angular CLI with Proxy:**
+```bash
+ng serve --proxy-config proxy.conf.json
+```
+
+## Testing Strategy
+
+### Frontend Testing
+
+**Unit Testing with Jasmine/Karma:**
+```typescript
+describe('AuthService', () => {
+  let service: AuthService;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [AuthService]
+    });
+    service = TestBed.inject(AuthService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+
+  it('should authenticate user', () => {
+    const mockResponse = { token: 'test-token', role: 'STUDENT' };
+    
+    service.login({ username: 'test', password: 'test' }).subscribe(response => {
+      expect(response.token).toBe('test-token');
+    });
+
+    const req = httpMock.expectOne(`${service.apiUrl}/login`);
+    expect(req.request.method).toBe('POST');
+    req.flush(mockResponse);
+  });
+});
+```
+
+**End-to-End Testing with Protractor/Cypress:**
+```typescript
+describe('Login Flow', () => {
+  it('should login successfully', () => {
+    cy.visit('/login');
+    cy.get('[data-cy=username]').type('admin');
+    cy.get('[data-cy=password]').type('password');
+    cy.get('[data-cy=login-btn]').click();
+    cy.url().should('include', '/dashboard');
+  });
+});
+```
+
+### Integration Testing
+
+**Full Stack Integration Test:**
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class FullStackIntegrationTest {
+    
+    @Autowired
+    private TestRestTemplate restTemplate;
+    
+    @Test
+    void testLoginAndAccessProtectedEndpoint() {
+        // Login
+        LoginRequest loginRequest = new LoginRequest("admin", "password");
+        ResponseEntity<AuthResponse> loginResponse = 
+            restTemplate.postForEntity("/api/auth/login", loginRequest, AuthResponse.class);
+        
+        assertEquals(HttpStatus.OK, loginResponse.getStatusCode());
+        String token = loginResponse.getBody().getToken();
+        
+        // Access protected endpoint
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        
+        ResponseEntity<CourseDTO[]> coursesResponse = 
+            restTemplate.exchange("/api/courses", HttpMethod.GET, entity, CourseDTO[].class);
+        
+        assertEquals(HttpStatus.OK, coursesResponse.getStatusCode());
+    }
+}
+```
+
+## Deployment Guide
+
+### Production Deployment
+
+**Frontend Deployment (Nginx):**
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    
+    location / {
+        root /var/www/college-frontend/dist;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+    
+    location /api/ {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+**Backend Deployment (Docker):**
+```dockerfile
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY target/college-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+
+**Docker Compose:**
+```yaml
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: college_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./college
+    ports:
+      - "8080:8080"
+    environment:
+      DB_USERNAME: root
+      DB_PASSWORD: rootpassword
+      JWT_SECRET: your_production_secret
+    depends_on:
+      - mysql
+
+  frontend:
+    build: ./myApp
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+```
+
+This comprehensive documentation covers the full-stack architecture, implementation details, and deployment strategies for the College Management System.
