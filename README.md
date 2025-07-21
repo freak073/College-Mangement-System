@@ -12,7 +12,7 @@ A comprehensive college management system built with **Spring Boot** backend and
 │  ├── Student Dashboard       │  ├── REST API Controllers    │
 │  ├── Faculty Dashboard       │  ├── JWT Authentication      │
 │  ├── Admin Dashboard         │  ├── Spring Security         │
-│  ├── Course Management       │  ├── JPA/Hibernate          │
+│  ├── Course Management       │  ├── JPA/Hibernate           │
 │  └── User Management         │  └── MySQL Database          │
 └─────────────────────────────────────────────────────────────┘
 ```
